@@ -97,14 +97,31 @@ variable "cdp_resourcegroup_name" {
   default = null
 
   validation {
-    condition     = (var.cdp_resourcegroup_name == null ? true : length(var.cdp_resourcegroup_name) >= 1 && length(var.cdp_resourcegroup_name) <= 90)
+    condition = (
+      var.cdp_resourcegroup_name == null ? true : (
+        length(var.cdp_resourcegroup_name) >= 1 && length(var.cdp_resourcegroup_name) <= 90
+      )
+    )
     error_message = "The length of cdp_resourcegroup_name must be 90 characters or less."
   }
 
   validation {
-    condition     = (var.cdp_resourcegroup_name == null ? true : can(regex("^[a-zA-Z0-9\\-\\_\\.]{1,90}$", var.cdp_resourcegroup_name)))
+    condition = (
+      var.cdp_resourcegroup_name == null ? true : (
+        can(regex("^[a-zA-Z0-9\\-\\_\\.]{1,90}$", var.cdp_resourcegroup_name))
+      )
+    )
     error_message = "cdp_resourcegroup_name can consist only of letters, numbers, dots (.), hyphens (-) and underscores (_)."
   }
+
+  validation {
+    condition = (
+      var.create_resource_group == true ? var.cdp_resourcegroup_name != null && length(var.cdp_resourcegroup_name) > 0 : true
+    )
+    error_message = "When create_resource_group is true, cdp_resourcegroup_name must be provided and not empty to use as the resource group name."
+  }
+}
+
 
 }
 
