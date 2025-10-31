@@ -93,8 +93,7 @@ variable "network_resourcegroup_name" {
 variable "cdp_resourcegroup_name" {
   type        = string
   description = "Resource Group name for resources. If either create_vnet or create_resource_group is false this is a pre-existing resource group."
-
-  default = null
+  default     = null
 
   validation {
     condition = (
@@ -122,13 +121,10 @@ variable "cdp_resourcegroup_name" {
   }
 }
 
-
 variable "create_resource_group" {
-  type = bool
-
+  type        = bool
   description = "Flag to specify if the Resource Group should be created"
-
-  default = true
+  default     = true
 }
 
 variable "create_vnet" {
