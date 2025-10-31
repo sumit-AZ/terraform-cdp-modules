@@ -123,8 +123,6 @@ variable "cdp_resourcegroup_name" {
 }
 
 
-}
-
 variable "create_resource_group" {
   type = bool
 
